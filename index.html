@@ -25,7 +25,54 @@
     </div>
 
     <script type="text/javascript">
-  
+      var container = document.querySelector(".container");
+var card = document.querySelector(".card");
+var title = document.querySelector(".title");
+var santa = document.querySelector(".santa");
+var tree = document.querySelector(".tree");
+//card rotate on mouse move
+container.addEventListener("mousemove", function (rotate) {
+    var x = (innerWidth / 2 - rotate.pageX) / 15;
+    var y = (innerHeight / 2 - rotate.pageY) / 15;
+    card.style.transform = "rotateY(" + x + "deg) rotateX(" + y + "deg)";
+});
+//card effects on mouse over the card
+container.addEventListener("mouseover", function () {
+    title.style.transform = "translate3d(0, 0, 160px)";
+    santa.style.transform = "translate3d(0, 0, 220px)";
+    tree.style.transform = "translate3d(0, 0, 120px)";
+    card.style.transition = "all 0.1s ease";
+});
+//card back to normal when mouse out
+container.addEventListener("mouseout", function () {
+    card.style.transform = "rotateY(0deg) rotateX(0deg)";
+    card.style.transition = "all 0.5s ease";
+    title.style.transform = "translate3d(0, 0, 0)";
+    santa.style.transform = "translate3d(0, 0, 0)";
+    tree.style.transform = "translate3d(0, 0, 0)";
+});
+//Mobile
+var touchMove = function (rotate) {
+    var x = (innerWidth / 2 - rotate.changedTouches[0].pageX) / 15;
+    var y = (innerHeight / 2 - rotate.changedTouches[0].pageY) / 15;
+    card.style.transform = "rotateY(" + x + "deg) rotateX(" + y + "deg)";
+};
+document.body.addEventListener('touchstart', function () {
+    title.style.transform = "translate3d(0, 0, 160px)";
+    santa.style.transform = "translate3d(0, 0, 220px)";
+    tree.style.transform = "translate3d(0, 0, 120px)";
+    card.style.transition = "all 0.1s ease";
+    document.body.addEventListener('touchmove', touchMove);
+});
+document.body.addEventListener('touchend', function () {
+    document.body.removeEventListener('touchmove', touchMove);
+    card.style.transform = "rotateY(0deg) rotateX(0deg)";
+    card.style.transition = "all 0.5s ease";
+    title.style.transform = "translate3d(0, 0, 0)";
+    santa.style.transform = "translate3d(0, 0, 0)";
+    tree.style.transform = "translate3d(0, 0, 0)";
+});
+
     </script>
 
   </body>
